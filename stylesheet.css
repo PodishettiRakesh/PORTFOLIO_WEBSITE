@@ -299,7 +299,7 @@ section{
     border-radius: 3px;
     top: -28px;
     right: -20px;
-    animation: showText 0.5 1.5s linear forwards;
+    animation: showText 0.5s 1.5s linear forwards;
     opacity: 0;
 }
 
@@ -313,10 +313,10 @@ section{
     content: "85%";
 }
 .progress-line.python span::after{
-    content: "90%";
+    content: "50%";
 }
 .progress-line.react span::after{
-    content: "90%";
+    content: "75%";
 }
 
 .progress-line span::before{
