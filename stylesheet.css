@@ -465,16 +465,30 @@ section{
     color: #0ef;
 }
 .portfolio-content{
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(359px,auto));
+    /* display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(359px,auto)); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.row{
+/* .row{
     position: relative;
     overflow: hidden;
     border-radius: 8px;
     cursor: pointer;
+} */
+.row {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+    /* Set flex properties for items to be side by side */
+    flex: 1 1 calc(33.333% - 20px);
+    margin-bottom: 20px;
 }
+
 .row img{
     width: 100%;
     border-radius: 8px;
@@ -520,6 +534,7 @@ section{
     background: #fff;
     width: 60px;
     height: 60px;
+    display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
