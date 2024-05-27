@@ -486,8 +486,60 @@ section{
     height: 0;
     background: linear-gradient(rgba(0,0,0,0.1),#0ef);
     position: absolute;
-    bord
+    border-radius: 8px;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 40px;
+    transition: height 0.5s;
 }
+
+.layer h5{
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.layer p{
+    color: #000;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+
+.layer i{
+    color: #ff004f;
+    margin-top: 20px;
+    font-size: 20px;
+    background: #fff;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.row:hover img{
+    transform: scale(1.1);   
+}
+
+.row:hover .layer{
+    height: 100%;
+}
+
+
+
+
+
+
+
+
 
 @keyframes showText {
     100% {
