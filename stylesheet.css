@@ -683,11 +683,11 @@ section{
     margin-top: 70px;
 }
 
-.top{
+/* .top{
     position: fixed;
     bottom: 2,1 rem;
     right: 2.1rem;
-}
+} */
 
 .top i{
     columns: #000;
