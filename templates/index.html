@@ -45,7 +45,8 @@
 
     <section class="about" id="about">
         <div class="about-img">
-            <img src="bike.jpg">
+            <img src="{{ url_for('static', filename='images/bike.jpg') }}" alt="Image Description">
+
         </div>
         <div class="about-text">
             <h2>About<span>Me</span></h2>
@@ -165,7 +166,8 @@
             <h2>Latest <span>Project</span></h2>
             <div class="portfolio-content">
                 <div class="row">
-                    <img src="photo-1504279807002-09854ccc9b6c.jpg">
+                    <img src="{{ url_for('static', filename='images/poker.jpg') }}" alt="Image Description">
+
                     <div class="layer">
                         <h5>POKER</h5>
                         <p>The poker.py project is a Python program designed to simulate the 
@@ -177,7 +179,8 @@
                 </div>
 
                 <div class="row">
-                    <img src="weather.jpg">
+                    <img src="{{ url_for('static', filename='images/weather.jpg') }}" alt="Image Description">
+
                     <div class="layer">
                         <h5>web developer</h5>
                         <p>UI (User Interface) Design focuses on the visual aspects of a product, ensuring that it is aesthetically pleasing and intuitively usable. UX (User Experience) Design, on the other hand, emphasizes the 
@@ -188,7 +191,8 @@
                 </div>
 
                 <div class="row">
-                    <img src="photo-1504279807002-09854ccc9b6c.jpg">
+                    <img src="{{ url_for('static', filename='images/poker.jpg') }}" alt="Image Description">
+
                     <div class="layer">
                         <h5>UI/UX Design</h5>
                         <p>UI (User Interface) Design focuses on the visual aspects of a product, ensuring that it is aesthetically pleasing and intuitively usable. UX (User Experience) Design, on the other hand, emphasizes the 
