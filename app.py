@@ -1,38 +1,41 @@
-from flask import Flask, request, jsonify
-import mysql.connector
-from mysql.connector import errorcode
+from flask import Flask, request, jsonify, render_template
+import psycopg2
+from psycopg2 import sql, OperationalError
 
 app = Flask(__name__)
 
-
+# Replace these with your actual PostgreSQL database credentials
 DB_CONFIG = {
+    'dbname': 'postgres',
     'user': 'postgres',
     'password': 'Rakesh062',
     'host': 'localhost',
-    'database': 'postgres'
+    'port': '5432'
 }
 
 # Create the database table if it doesn't exist
 def init_db():
     try:
-        conn = mysql.connector.connect(**DB_CONFIG)
+        conn = psycopg2.connect(**DB_CONFIG)
         cursor = conn.cursor()
-        cursor.execute('''CREATE TABLE IF NOT EXISTS messages (
-                            id INT AUTO_INCREMENT PRIMARY KEY,
-                            name VARCHAR(255) NOT NULL,
-                            email VARCHAR(255) NOT NULL,
-                            subject VARCHAR(255) NOT NULL,
-                            message TEXT NOT NULL)''')
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS messages (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                subject VARCHAR(255) NOT NULL,
+                message TEXT NOT NULL
+            )
+        ''')
         conn.commit()
         cursor.close()
         conn.close()
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Something is wrong with your user name or password")
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist")
-        else:
-            print(err)
+    except OperationalError as e:
+        print(f"Error: {e}")
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/submit-form', methods=['POST'])
 def submit_form():
@@ -42,16 +45,18 @@ def submit_form():
     message = request.form['message']
     
     try:
-        conn = mysql.connector.connect(**DB_CONFIG)
+        conn = psycopg2.connect(**DB_CONFIG)
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO messages (name, email, subject, message) VALUES (%s, %s, %s, %s)",
-                       (name, email, subject, message))
+        cursor.execute(
+            sql.SQL("INSERT INTO messages (name, email, subject, message) VALUES (%s, %s, %s, %s)"),
+            [name, email, subject, message]
+        )
         conn.commit()
         cursor.close()
         conn.close()
         return jsonify(success=True)
-    except mysql.connector.Error as err:
-        return jsonify(success=False, error=str(err))
+    except OperationalError as e:
+        return jsonify(success=False, error=str(e))
 
 if __name__ == '__main__':
     init_db()
