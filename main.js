@@ -6,6 +6,29 @@ document.addEventListener('DOMContentLoaded', function () {
         backDelay: 1000,
         loop: true
     });
+
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var formData = new FormData(this);
+
+        fetch('/submit-form', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Message sent successfully!');
+            } else {
+                alert('Error sending message.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error sending message.');
+        });
+    });
 });
 
 
